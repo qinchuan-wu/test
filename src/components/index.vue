@@ -19,6 +19,7 @@
         <p v-for="(item,index) in name.user" :key="index">{{item}}</p>
       </template>
     </current-user>
+    <div>新增加的div</div>
   </div>
 </template>
 <script>
