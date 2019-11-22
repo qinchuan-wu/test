@@ -22,6 +22,7 @@
     <div>新增加的div</div>
     <div>这里是增加的dev分支</div>
     <div>这里是冲突之2</div>
+    <div>这里是测试上传代码到远程仓库</div>
   </div>
 </template>
 <script>
