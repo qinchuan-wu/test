@@ -21,6 +21,7 @@
     </current-user>
     <div>新增加的div</div>
     <div>这里是增加的dev分支</div>
+    <div> 这里是冲突1</div>
   </div>
 </template>
 <script>
