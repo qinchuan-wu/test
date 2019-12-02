@@ -36,6 +36,7 @@ export default {
       time: "2019nian"
     };
   },
+
   methods: {
     //数组排序
     numOrder() {
