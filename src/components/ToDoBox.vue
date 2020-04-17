@@ -58,7 +58,7 @@ export default {
     namehelloworld(id) {
       this.$router.push({
         name: "Hello",
-        params: {
+        params: {   
           id: id
         }
       });

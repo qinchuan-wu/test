@@ -59,6 +59,7 @@ export default {
   },
   mounted() {
     // this.clickme();
+    this.getAddress()
   },
   data() {
     return {
@@ -67,6 +68,15 @@ export default {
     };
   },
   methods: {
+    getAddress() {
+      if (navigator.geolocation) {
+        var n = navigator.geolocation.getCurrentPosition(function(res) {
+          console.log("11111",res); // 需要的坐标地址就在res中
+        });
+      } else {
+        alert("该浏览器不支持定位");
+      }
+    },
     clickme() {
       this.$refs.id.focus();
     },
