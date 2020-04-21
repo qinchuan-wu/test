@@ -24,27 +24,51 @@ Vue.component('currentUser', currentUser)
 const myStore = new Vuex.Store({
   //初始化状态
   state: {
-    list: []
+    list: ["0"],
+    count: 0,
+    todos: [{
+        id: 1,
+        text: ".....",
+        done: true
+      },
+      {
+        id: 2,
+        text: ".....",
+        done: false
+      }
+    ]
   },
   //读状态中的值
   getters: {
-    list: (state) => {
-
-      console.log(state.list)
-      return state.list;
+    doneTodos: state => {
+      return state.todos.filter(todo =>todo.done)
+    },
+    doneTodosCount:(state,getters)=>{
+      return getters.doneTodos.length
+    },
+    //通过方法访问
+    getTodoById:(state)=>(id)=>{
+      return state.todos.find(todo=>todo.id===id)
     }
+
   },
-  //修改状态
+  //修改状态state里面的值
   mutations: {
-    add: (state, value) => {
-      //添加
-      console.log('准备添加数据' + value)
-      state.list.push(value)
+    increment (state)  {
+      //变更状态
+      console.log('变更状态')
+      state.count++
     },
     delete: (state, index) => {
       //移除
-      console.log('准备移除数据')
-      state.list.splice(index, 1)
+      console.log('准备做减得操作')
+     state.count-=index
+    }
+  },
+  //actions
+  actions:{
+    increment({commit}){
+      commit('increment')
     }
   }
 })
@@ -56,6 +80,8 @@ new Vue({
   el: '#app',
   router,
   store: myStore,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })

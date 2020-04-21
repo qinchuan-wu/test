@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div>
+      <h1>vuex</h1>
+      <p>{{count}}</p>
+      <button @click="handleClicck">handleClicck</button>
+      <button @click="deleteCount">deleteCount</button>
+      <button @click="actionClick">actionClick</button>
+      <p>{{doneTodosCount}}</p>
+      <p>{{doneTodos}}</p>
+      <p>{{getTodoById}}</p>
+    </div>
     <div class="input1">
       <div class="input2">
         <span>输入姓名：</span>
@@ -52,6 +62,8 @@
 <script>
 import baseLayout from "../component/baseLayout";
 import currentUser from "../component/currentUser";
+
+import { mapState,mapGetters } from "vuex";
 export default {
   components: {
     baseLayout,
@@ -59,7 +71,7 @@ export default {
   },
   mounted() {
     // this.clickme();
-    this.getAddress()
+    this.getAddress();
   },
   data() {
     return {
@@ -67,11 +79,42 @@ export default {
       input2: ""
     };
   },
+  computed:{
+    //mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性
+    // ...mapGetters([
+    //   'doneTodosCount',
+    //   'doneTodos',
+    // ])
+
+    count(){
+      return this.$store.state.count
+    },
+    //通过属性访问
+    doneTodosCount() {
+      return this.$store.getters.doneTodosCount;
+    },
+    doneTodos() {
+      return this.$store.getters.doneTodos;
+    },
+    //通过方法访问
+    getTodoById(){
+      return this.$store.getters.getTodoById(2)
+    }
+  },
   methods: {
+    actionClick(){
+      this.$store.dispatch("increment")
+    },
+    deleteCount(){
+      this.$store.commit('delete',2)
+    },
+    handleClicck(){
+      this.$store.commit('increment')
+    },
     getAddress() {
       if (navigator.geolocation) {
         var n = navigator.geolocation.getCurrentPosition(function(res) {
-          console.log("11111",res); // 需要的坐标地址就在res中
+          console.log("11111", res); // 需要的坐标地址就在res中
         });
       } else {
         alert("该浏览器不支持定位");
